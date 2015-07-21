@@ -1,0 +1,50 @@
+#ifndef MSWITCH_GUARD_H
+#define MSWITCH_GUARD_H
+
+#include <initializer_list>
+#include <cstddef>
+
+namespace mswitch
+{
+    constexpr long long encode(long long value, size_t size) { return value << 6 | (0x3F & size); }
+
+    class mswitch
+    {
+        std::initializer_list<bool> _flags;
+    public:
+        mswitch(std::initializer_list<bool> const& l) : _flags(l) {}
+        operator long long() const
+        {
+            long long result = 0;
+            size_t index = 0;
+            for (bool b : _flags) {
+                result |= b << index++;
+            }
+            return encode(result, _flags.size());
+        }
+    };
+
+    template<bool head, bool... tail>
+    struct mcase
+    {
+        constexpr mcase() = default;
+        constexpr operator long long() const
+        {
+            return encode(tll(), 1+sizeof...(tail));
+        }
+        constexpr long long tll() const { return head | mcase<tail...>().tll() << 1; }
+    };
+
+    template<bool b>
+    struct mcase<b>
+    {
+        constexpr mcase() = default;
+        constexpr operator long long() const { return encode(tll(), 1); }
+        constexpr long long tll() const { return b; }
+    };
+}
+
+#define mswitch(head, tail...) switch(mswitch::mswitch{head, ##tail})
+#define mcase(head, tail...) case mswitch::mcase<head, ##tail>()
+
+#endif // MSWITCH_GUARD_H
