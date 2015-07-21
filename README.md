@@ -31,3 +31,9 @@ int main(void)
     return 0;
 }
 ```
+
+## Compile with
+Compile with GNU C++ version 4.9 or higher:
+```shell
+$ g++ -std=c++11 test.cpp -o test
+```
