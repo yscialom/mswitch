@@ -3,10 +3,10 @@ C++ multiple-test switch synthax
 
 ## Usage example
 ```C++
-#include <mswitch> /* mswitch, mcase */
-#include <iostream> /* std::cout */
+#include <mswitch>  // mswitch, mcase
+#include <iostream> // std::cout
 
-int main(void)
+int main()
 {
     int a = 42;
     int b = a/2;
@@ -28,12 +28,11 @@ int main(void)
 	      std::cout << "a <= b, f <= pi" << std::endl;
         break;
     }
-    return 0;
 }
 ```
 
 ## Compile with
 Compile with GNU C++ version 4.9 or higher:
 ```shell
-$ g++ -std=c++11 test.cpp -o test
+$ g++ -std=c++11 test.cpp -o test #c++-11 or newer
 ```
