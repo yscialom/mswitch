@@ -22,10 +22,10 @@ int main()
         std::cout << "a > b, f <= pi" << std::endl;
         break;
     mcase(false, true):
-	      std::cout << "a <= b, f > pi" << std::endl;
+        std::cout << "a <= b, f > pi" << std::endl;
         break;
     mcase(false, false):
-	      std::cout << "a <= b, f <= pi" << std::endl;
+        std::cout << "a <= b, f <= pi" << std::endl;
         break;
     }
 }
